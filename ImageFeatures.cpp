@@ -14,3 +14,12 @@ void MapsMerge::ImageFeatures::showImage(string windowName) {
 	imshow(windowName, img);
 	waitKey(0);
 }
+
+void MapsMerge::ImageFeatures::showKeypoints(string windowName) {
+	Mat imgWithKeypoints;
+	drawKeypoints(img, keypoints, imgWithKeypoints);
+	namedWindow(windowName, WINDOW_NORMAL);
+	imshow(windowName, imgWithKeypoints);
+	waitKey(0);
+	imgWithKeypoints.release();
+}

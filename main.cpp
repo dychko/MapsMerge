@@ -15,14 +15,16 @@ int testOpenCV(int, char**);
 
 int main(int argc, char** argv) {
 
-	string imgPath1 = "ap-GOPR9460.jpg";
-	string imgPath2 = "from-google-cut.jpg";
+	string imgPath1 = "imgs/ap-GOPR9460.jpg";
+	string imgPath2 = "imgs/from-google-cut.jpg";
 
 	MapsMerger mapsMerger;
 
 	mapsMerger.readImages(imgPath1, imgPath2);
 	mapsMerger.showImages();
 	mapsMerger.setKeypointsDescriptorsExtractor(new SurfStrategy());
+	mapsMerger.detectAndCompute();
+	mapsMerger.showKeypoints();
     
     return 0;
 }

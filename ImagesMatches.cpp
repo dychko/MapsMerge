@@ -9,3 +9,8 @@ void MapsMerge::ImagesMatches::showImages() {
 	imgFeatures1.showImage("Image 1");
 	imgFeatures2.showImage("Image 2");
 }
+
+void MapsMerge::ImagesMatches::showKeypoints() {
+	imgFeatures1.showKeypoints("Image 1 keypoints");
+	imgFeatures2.showKeypoints("Image 2 keypoints");
+}

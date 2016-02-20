@@ -8,10 +8,14 @@ void MapsMerge::MapsMerger::showImages() {
 	imagesMatches.showImages();
 }
 
+void MapsMerge::MapsMerger::showKeypoints() {
+	imagesMatches.showKeypoints();
+}
+
 void MapsMerge::MapsMerger::setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e) {
 	keypointsDescriptorsExtractor = e;
 }
 
-void MapsMerge::MapsMerger::detectAndCompute(ImagesMatches& imagesMatches) {
+void MapsMerge::MapsMerger::detectAndCompute() {
 	keypointsDescriptorsExtractor->detectAndCompute(imagesMatches);
 }

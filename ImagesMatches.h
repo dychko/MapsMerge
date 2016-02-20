@@ -16,6 +16,7 @@ namespace MapsMerge {
 
 		void readImages(string imgPath1, string imgPath2);
 		void showImages();
+		void showKeypoints();
 	};
 }
 

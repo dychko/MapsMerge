@@ -21,9 +21,10 @@ namespace MapsMerge {
 	public:
 		void readImages(std::string imgPath1, std::string imgPath2);
 		void showImages();
+		void showKeypoints();
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);
-		void detectAndCompute(ImagesMatches& imagesMatches);
+		void detectAndCompute();
 	};
 }
 
