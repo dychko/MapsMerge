@@ -19,6 +19,8 @@ namespace MapsMerge {
 		vector<KeyPoint> keypoints;
 		Mat descriptors;
 
+		vector<Rect> regions;
+
 		void readImage(string imgPath);
 		void showImage(string windowName);
 		void showKeypoints(string windowName);

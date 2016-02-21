@@ -31,3 +31,11 @@ void MapsMerge::MapsMerger::matchDescriptors() {
 void MapsMerge::MapsMerger::showMatches(string winName) {
 	imagesMatches.showMatches(winName);
 }
+
+void MapsMerge::MapsMerger::setRegionsSelector(RegionsSelector* s) {
+	regionsSelector = s;
+}
+
+void MapsMerge::MapsMerger::selectRegions() {
+	regionsSelector->selectRegions(imagesMatches);
+}

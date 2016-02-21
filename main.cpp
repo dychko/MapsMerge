@@ -8,6 +8,7 @@
 #include "SiftStrategy.h"
 #include "AsiftStrategy.h"
 #include "FlannMatcherStrategy.h"
+#include "ManualRegionsSelector.h"
 
 
 using namespace cv;
@@ -31,6 +32,11 @@ int main(int argc, char** argv) {
 	mapsMerger.setDescriptorMatcher(new FlannMatcherStrategy());
 	mapsMerger.matchDescriptors();
 	mapsMerger.showMatches("Matches");
+
+	mapsMerger.setRegionsSelector(new ManualRegionsSelector());
+	mapsMerger.selectRegions();
+
+
 
 
 
