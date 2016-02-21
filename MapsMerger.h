@@ -20,8 +20,8 @@ namespace MapsMerge {
 		//MapsMerge::QualityEvaluator qualityEvaluator;
 	public:
 		void readImages(std::string imgPath1, std::string imgPath2);
-		void showImages();
-		void showKeypoints();
+		void showImages(string winName1, string winName2);
+		void showKeypoints(string winName1, string winName2);
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);
 		void detectAndCompute();

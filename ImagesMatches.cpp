@@ -5,12 +5,12 @@ void MapsMerge::ImagesMatches::readImages(string imgPath1, string imgPath2) {
 	imgFeatures2.readImage(imgPath2);
 }
 
-void MapsMerge::ImagesMatches::showImages() {
-	imgFeatures1.showImage("Image 1");
-	imgFeatures2.showImage("Image 2");
+void MapsMerge::ImagesMatches::showImages(string winName1, string winName2) {
+	imgFeatures1.showImage(winName1);
+	imgFeatures2.showImage(winName2);
 }
 
-void MapsMerge::ImagesMatches::showKeypoints() {
-	imgFeatures1.showKeypoints("Image 1 keypoints");
-	imgFeatures2.showKeypoints("Image 2 keypoints");
+void MapsMerge::ImagesMatches::showKeypoints(string winName1, string winName2) {
+	imgFeatures1.showKeypoints(winName1);
+	imgFeatures2.showKeypoints(winName2);
 }

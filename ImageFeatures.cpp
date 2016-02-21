@@ -2,7 +2,7 @@
 
 
 void MapsMerge::ImageFeatures::readImage(string imgPath) {
-	img = imread(imgPath, CV_LOAD_IMAGE_COLOR);
+	img = imread(imgPath, CV_LOAD_IMAGE_GRAYSCALE);
 	if (!img.data) {
 		cerr << "Could not read an image: " + imgPath << endl;
 		throw "imread exception";

@@ -15,8 +15,8 @@ namespace MapsMerge {
 		MapsMerge::ImageFeatures imgFeatures2;
 
 		void readImages(string imgPath1, string imgPath2);
-		void showImages();
-		void showKeypoints();
+		void showImages(string winName1, string winName2);
+		void showKeypoints(string winName1, string winName2);
 	};
 }
 

@@ -5,13 +5,13 @@
 #include "MapsMerger.h"
 
 #include "SurfStrategy.h"
+#include "SiftStrategy.h"
+#include "AsiftStrategy.h"
 
 
 using namespace cv;
 using namespace std;
 using namespace MapsMerge;
-
-int testOpenCV(int, char**);
 
 int main(int argc, char** argv) {
 
@@ -21,32 +21,19 @@ int main(int argc, char** argv) {
 	MapsMerger mapsMerger;
 
 	mapsMerger.readImages(imgPath1, imgPath2);
-	mapsMerger.showImages();
+	mapsMerger.showImages("Image 1", "Image 2");
+
 	mapsMerger.setKeypointsDescriptorsExtractor(new SurfStrategy());
 	mapsMerger.detectAndCompute();
-	mapsMerger.showKeypoints();
+	mapsMerger.showKeypoints("Surf image 1", "Surf image 2");
+
+	mapsMerger.setKeypointsDescriptorsExtractor(new SiftStrategy());
+	mapsMerger.detectAndCompute();
+	mapsMerger.showKeypoints("Sift keypoints 1", "Sift keypoints 2");	
+
+	mapsMerger.setKeypointsDescriptorsExtractor(new AsiftStrategy());
+	mapsMerger.detectAndCompute();
+	mapsMerger.showKeypoints("Asift keypoints 1", "Asift keypoints 2");
     
     return 0;
-}
-
-int testOpenCV(int argc, char** argv) {
-	if(argc != 2) {
-     std::cout <<" Usage: display_image ImageToLoadAndDisplay" << std::endl;
-     return -1;
-    }
-
-	cv::Mat image;
-    image = cv::imread(argv[1], cv::IMREAD_COLOR); // Read the file
-
-     // Check for invalid input
-	if(!image.data) {
-        std::cout << "Could not open or find the image" << std::endl ;
-        return -1;
-    }
-
-    cv::namedWindow( "Display window", cv::WINDOW_AUTOSIZE ); // Create a window for display.
-    cv::imshow( "Display window", image ); // Show our image inside it.
-
-    cv::waitKey(0); // Wait for a keystroke in the window
-	return 0;
 }
