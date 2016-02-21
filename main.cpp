@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
 	mapsMerger.setRegionsSelector(new ManualRegionsSelector());
 	mapsMerger.selectRegions();
-
+	mapsMerger.leaveRegionsMatches();
 
 
 

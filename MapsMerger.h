@@ -34,6 +34,7 @@ namespace MapsMerge {
 
 		void setRegionsSelector(RegionsSelector* s);
 		void selectRegions();
+		void leaveRegionsMatches();		
 
 	};
 }

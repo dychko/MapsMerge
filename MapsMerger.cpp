@@ -39,3 +39,7 @@ void MapsMerge::MapsMerger::setRegionsSelector(RegionsSelector* s) {
 void MapsMerge::MapsMerger::selectRegions() {
 	regionsSelector->selectRegions(imagesMatches);
 }
+
+void MapsMerge::MapsMerger::leaveRegionsMatches() {
+	regionsSelector->leaveRegionsMatches(imagesMatches);
+}

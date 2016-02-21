@@ -6,15 +6,12 @@
 namespace MapsMerge {
 	class ImagesMatches {
 
-	private:
-		vector<DMatch> goodMatches;
-
 	public:
 		MapsMerge::ImageFeatures imgFeatures1;
 		MapsMerge::ImageFeatures imgFeatures2;
 
 		vector<DMatch> matches;
-
+		vector<DMatch> goodMatches;
 
 		void readImages(string imgPath1, string imgPath2);
 		void showImages(string winName1, string winName2);
