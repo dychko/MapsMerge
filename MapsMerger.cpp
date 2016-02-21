@@ -19,3 +19,15 @@ void MapsMerge::MapsMerger::setKeypointsDescriptorsExtractor(KeypointsDescriptor
 void MapsMerge::MapsMerger::detectAndCompute() {
 	keypointsDescriptorsExtractor->detectAndCompute(imagesMatches);
 }
+
+void MapsMerge::MapsMerger::setDescriptorMatcher(DescriptorsMatcher* d) {
+	descriptorsMatcher = d;
+}
+
+void MapsMerge::MapsMerger::matchDescriptors() {
+	descriptorsMatcher->matchDescriptors(imagesMatches);
+}
+
+void MapsMerge::MapsMerger::showMatches(string winName) {
+	imagesMatches.showMatches(winName);
+}

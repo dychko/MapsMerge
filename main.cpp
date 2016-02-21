@@ -7,6 +7,7 @@
 #include "SurfStrategy.h"
 #include "SiftStrategy.h"
 #include "AsiftStrategy.h"
+#include "FlannMatcherStrategy.h"
 
 
 using namespace cv;
@@ -27,13 +28,12 @@ int main(int argc, char** argv) {
 	mapsMerger.detectAndCompute();
 	mapsMerger.showKeypoints("Surf image 1", "Surf image 2");
 
-	mapsMerger.setKeypointsDescriptorsExtractor(new SiftStrategy());
-	mapsMerger.detectAndCompute();
-	mapsMerger.showKeypoints("Sift keypoints 1", "Sift keypoints 2");	
+	mapsMerger.setDescriptorMatcher(new FlannMatcherStrategy());
+	mapsMerger.matchDescriptors();
+	mapsMerger.showMatches("Matches");
 
-	mapsMerger.setKeypointsDescriptorsExtractor(new AsiftStrategy());
-	mapsMerger.detectAndCompute();
-	mapsMerger.showKeypoints("Asift keypoints 1", "Asift keypoints 2");
+
+
     
     return 0;
 }

@@ -4,6 +4,7 @@
 #include "ImagesMatches.h"
 
 #include "KeypointsDescriptorsExtractor.h"
+#include "DescriptorsMatcher.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ namespace MapsMerge {
 	private:
 		ImagesMatches imagesMatches;
 		KeypointsDescriptorsExtractor* keypointsDescriptorsExtractor;
-		//MapsMerge::DescriptorsMatcher descriptorMatcher;
+		DescriptorsMatcher* descriptorsMatcher;
 		//MapsMerge::RegionsSelector regionsSelector;
 		//MapsMerge::ImageTransformer imageTransformer;
 		//MapsMerge::ImagesMerger imagesMerger;
@@ -22,9 +23,14 @@ namespace MapsMerge {
 		void readImages(std::string imgPath1, std::string imgPath2);
 		void showImages(string winName1, string winName2);
 		void showKeypoints(string winName1, string winName2);
+		void showMatches(string winName);
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);
 		void detectAndCompute();
+
+		void setDescriptorMatcher(DescriptorsMatcher* d);
+		void matchDescriptors();
+
 	};
 }
 

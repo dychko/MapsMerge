@@ -14,3 +14,15 @@ void MapsMerge::ImagesMatches::showKeypoints(string winName1, string winName2) {
 	imgFeatures1.showKeypoints(winName1);
 	imgFeatures2.showKeypoints(winName2);
 }
+
+void MapsMerge::ImagesMatches::showMatches(string winName) {
+	Mat imgMatches;
+	drawMatches(
+		imgFeatures1.img, imgFeatures1.keypoints,
+		imgFeatures2.img, imgFeatures2.keypoints,
+		matches, imgMatches,
+		Scalar::all(-1), Scalar::all(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+	namedWindow(winName, WINDOW_NORMAL);
+	imshow(winName, imgMatches);
+	waitKey(0);
+}
