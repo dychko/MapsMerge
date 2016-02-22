@@ -9,6 +9,7 @@
 #include "AsiftStrategy.h"
 #include "FlannMatcherStrategy.h"
 #include "ManualRegionsSelector.h"
+#include "ImageTransformerStrategy.h"
 
 
 using namespace cv;
@@ -34,11 +35,14 @@ int main(int argc, char** argv) {
 	mapsMerger.showMatches("Matches");
 
 	mapsMerger.setRegionsSelector(new ManualRegionsSelector());
+
 	mapsMerger.selectRegions();
 	mapsMerger.leaveRegionsMatches();
 
+	mapsMerger.setImageTransformer(new ImageTransformerStrategy());
+	mapsMerger.transformImage();
 
-
+	mapsMerger.showTransformedImage("Transformed image");
 
     
     return 0;

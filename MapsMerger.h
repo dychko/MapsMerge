@@ -6,6 +6,7 @@
 #include "KeypointsDescriptorsExtractor.h"
 #include "DescriptorsMatcher.h"
 #include "RegionsSelector.h"
+#include "ImageTransformer.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ namespace MapsMerge {
 		KeypointsDescriptorsExtractor* keypointsDescriptorsExtractor;
 		DescriptorsMatcher* descriptorsMatcher;
 		RegionsSelector* regionsSelector;
-		//MapsMerge::ImageTransformer imageTransformer;
+		ImageTransformer* imageTransformer;
 		//MapsMerge::ImagesMerger imagesMerger;
 		//MapsMerge::QualityEvaluator qualityEvaluator;
 	public:
@@ -35,6 +36,11 @@ namespace MapsMerge {
 		void setRegionsSelector(RegionsSelector* s);
 		void selectRegions();
 		void leaveRegionsMatches();		
+
+		void setImageTransformer(ImageTransformer* t);
+		void transformImage();
+
+		void showTransformedImage(string winName);
 
 	};
 }

@@ -43,3 +43,15 @@ void MapsMerge::MapsMerger::selectRegions() {
 void MapsMerge::MapsMerger::leaveRegionsMatches() {
 	regionsSelector->leaveRegionsMatches(imagesMatches);
 }
+
+void MapsMerge::MapsMerger::setImageTransformer(ImageTransformer* t) {
+	imageTransformer = t;
+}
+
+void MapsMerge::MapsMerger::transformImage() {
+	imageTransformer->transformImage(imagesMatches);
+}
+
+void MapsMerge::MapsMerger::showTransformedImage(string winName) {
+	imagesMatches.showTransformedImage(winName);
+}

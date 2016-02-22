@@ -13,10 +13,16 @@ namespace MapsMerge {
 		vector<DMatch> matches;
 		vector<DMatch> goodMatches;
 
+		Mat transformedImage;
+		
+		// For quality measurement
+		Rect interiorRect;		
+
 		void readImages(string imgPath1, string imgPath2);
 		void showImages(string winName1, string winName2);
 		void showKeypoints(string winName1, string winName2);
 		void showMatches(string winName);
+		void showTransformedImage(string winName);
 	};
 }
 

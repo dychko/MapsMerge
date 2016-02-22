@@ -1,0 +1,4 @@
+namespace MapsMerge {
+	class QualityEvaluator {
+	};
+}
