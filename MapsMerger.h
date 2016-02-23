@@ -7,6 +7,7 @@
 #include "DescriptorsMatcher.h"
 #include "RegionsSelector.h"
 #include "ImageTransformer.h"
+#include "images_merger\ImagesMerger.h"
 
 using namespace std;
 
@@ -19,7 +20,7 @@ namespace MapsMerge {
 		DescriptorsMatcher* descriptorsMatcher;
 		RegionsSelector* regionsSelector;
 		ImageTransformer* imageTransformer;
-		//MapsMerge::ImagesMerger imagesMerger;
+		ImagesMerger* imagesMerger;
 		//MapsMerge::QualityEvaluator qualityEvaluator;
 	public:
 		void readImages(std::string imgPath1, std::string imgPath2);
@@ -39,8 +40,11 @@ namespace MapsMerge {
 
 		void setImageTransformer(ImageTransformer* t);
 		void transformImage();
-
 		void showTransformedImage(string winName);
+
+		void setImagesMerger(ImagesMerger* m);
+		void mergeImages();
+		void showMergedImage(string winName);
 
 	};
 }

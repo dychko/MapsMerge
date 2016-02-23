@@ -32,3 +32,9 @@ void MapsMerge::ImagesMatches::showTransformedImage(string windowName) {
 	imshow(windowName, transformedImage);
 	waitKey(0);
 }
+
+void MapsMerge::ImagesMatches::showMergedImage(string windowName) {
+	namedWindow(windowName, WINDOW_NORMAL);
+	imshow(windowName, mergedImages);
+	waitKey(0);
+}

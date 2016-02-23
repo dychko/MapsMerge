@@ -14,6 +14,8 @@ namespace MapsMerge {
 		vector<DMatch> goodMatches;
 
 		Mat transformedImage;
+
+		Mat mergedImages;
 		
 		// For quality measurement
 		Rect interiorRect;		
@@ -23,6 +25,7 @@ namespace MapsMerge {
 		void showKeypoints(string winName1, string winName2);
 		void showMatches(string winName);
 		void showTransformedImage(string winName);
+		void showMergedImage(string winName);
 	};
 }
 

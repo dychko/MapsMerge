@@ -55,3 +55,15 @@ void MapsMerge::MapsMerger::transformImage() {
 void MapsMerge::MapsMerger::showTransformedImage(string winName) {
 	imagesMatches.showTransformedImage(winName);
 }
+
+void MapsMerge::MapsMerger::setImagesMerger(ImagesMerger* m) {
+	imagesMerger = m;
+}
+
+void MapsMerge::MapsMerger::mergeImages() {
+	imagesMerger->mergeImages(imagesMatches);
+}
+
+void MapsMerge::MapsMerger::showMergedImage(string winName) {
+	imagesMatches.showMergedImage(winName);
+}

@@ -10,6 +10,7 @@
 #include "FlannMatcherStrategy.h"
 #include "ManualRegionsSelector.h"
 #include "ImageTransformerStrategy.h"
+#include "ImagesMergerStrategy.h"
 
 
 using namespace cv;
@@ -28,7 +29,7 @@ int main(int argc, char** argv) {
 
 	mapsMerger.setKeypointsDescriptorsExtractor(new SurfStrategy());
 	mapsMerger.detectAndCompute();
-	mapsMerger.showKeypoints("Surf image 1", "Surf image 2");
+	mapsMerger.showKeypoints("Image 1 with keypoints", "Image 2 with keypoints");
 
 	mapsMerger.setDescriptorMatcher(new FlannMatcherStrategy());
 	mapsMerger.matchDescriptors();
@@ -43,6 +44,10 @@ int main(int argc, char** argv) {
 	mapsMerger.transformImage();
 
 	mapsMerger.showTransformedImage("Transformed image");
+
+	mapsMerger.setImagesMerger(new ImagesMergerStrategy());
+	mapsMerger.mergeImages();
+	mapsMerger.showMergedImage("Merge result");
 
     
     return 0;
