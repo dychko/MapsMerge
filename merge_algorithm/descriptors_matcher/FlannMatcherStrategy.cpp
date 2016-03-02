@@ -1,4 +1,4 @@
-#include "ImagesMatches.h"
+#include "../../image_matches/ImagesMatches.h"
 #include "FlannMatcherStrategy.h"
 
 void MapsMerge::FlannMatcherStrategy::matchDescriptors(ImagesMatches& imgsMatches) {

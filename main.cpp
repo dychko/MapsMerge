@@ -2,15 +2,15 @@
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
 
-#include "MapsMerger.h"
+#include "maps_merger/MapsMerger.h"
 
-#include "SurfStrategy.h"
-#include "SiftStrategy.h"
-#include "AsiftStrategy.h"
-#include "FlannMatcherStrategy.h"
-#include "ManualRegionsSelector.h"
-#include "ImageTransformerStrategy.h"
-#include "ImagesMergerStrategy.h"
+#include "merge_algorithm\keypoints_descriptors_extractor\SurfStrategy.h"
+#include "merge_algorithm\keypoints_descriptors_extractor\SiftStrategy.h"
+#include "merge_algorithm\keypoints_descriptors_extractor\AsiftStrategy.h"
+#include "merge_algorithm\descriptors_matcher\FlannMatcherStrategy.h"
+#include "merge_algorithm\regions_selector\ManualRegionsSelector.h"
+#include "merge_algorithm\image_transformer\ImageTransformerStrategy.h"
+#include "merge_algorithm\images_merger\ImagesMergerStrategy.h"
 
 
 using namespace cv;

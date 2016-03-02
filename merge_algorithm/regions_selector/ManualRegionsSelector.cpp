@@ -1,4 +1,4 @@
-#include "ImagesMatches.h"
+#include "../../image_matches/ImagesMatches.h"
 #include "ManualRegionsSelector.h"
 
 Point MapsMerge::ManualRegionsSelector::P1;

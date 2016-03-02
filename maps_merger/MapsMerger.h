@@ -1,13 +1,13 @@
 #ifndef __MAPSMERGER_H_INCLUDED__
 #define __MAPSMERGER_H_INCLUDED__
 
-#include "ImagesMatches.h"
+#include "../image_matches/ImagesMatches.h"
 
-#include "KeypointsDescriptorsExtractor.h"
-#include "DescriptorsMatcher.h"
-#include "RegionsSelector.h"
-#include "ImageTransformer.h"
-#include "images_merger\ImagesMerger.h"
+#include "../merge_algorithm/keypoints_descriptors_extractor/KeypointsDescriptorsExtractor.h"
+#include "../merge_algorithm/descriptors_matcher/DescriptorsMatcher.h"
+#include "../merge_algorithm/regions_selector/RegionsSelector.h"
+#include "../merge_algorithm/image_transformer/ImageTransformer.h"
+#include "../merge_algorithm/images_merger/ImagesMerger.h"
 
 using namespace std;
 

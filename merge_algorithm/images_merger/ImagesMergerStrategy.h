@@ -1,7 +1,7 @@
 #ifndef __IMAGESMERGERSTRATEGY_H_INCLUDED__
 #define __IMAGESMERGERSTRATEGY_H_INCLUDED__
 
-#include "images_merger\ImagesMerger.h"
+#include "ImagesMerger.h"
 #include "opencv2\core\core.hpp"
 
 class ImagesMatches;

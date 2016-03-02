@@ -1,4 +1,4 @@
-#include "ImagesMatches.h"
+#include "../../image_matches/ImagesMatches.h"
 #include "ImagesMergerStrategy.h"
 
 void MapsMerge::ImagesMergerStrategy::mergeImages(ImagesMatches& imgsMatches) {

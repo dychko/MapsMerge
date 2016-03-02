@@ -2,7 +2,7 @@
 #define __ASIFTSTRATEGY_H_INCLUDED__
 
 #include "KeypointsDescriptorsExtractor.h"
-#include "ASiftDetector.h"
+#include "ASIFT/ASiftDetector.h"
 
 class ImagesMatches;
 

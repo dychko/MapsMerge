@@ -1,10 +1,9 @@
-#include "ImagesMatches.h"
-#include "SurfStrategy.h"
+#include "../../image_matches/ImagesMatches.h"
+#include "SiftStrategy.h"
 
-void MapsMerge::SurfStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
-	int minHessian = 400;
+void MapsMerge::SiftStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
 
-	SurfFeatureDetector detector(minHessian);
+	SiftFeatureDetector detector;
 
 	detector.detect(
 		imgsMatches.imgFeatures1.img, 
@@ -14,7 +13,7 @@ void MapsMerge::SurfStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
 		imgsMatches.imgFeatures2.img,
 		imgsMatches.imgFeatures2.keypoints);
 
-	SurfDescriptorExtractor extractor;
+	SiftDescriptorExtractor extractor;
 
 	extractor.compute(
 		imgsMatches.imgFeatures1.img,

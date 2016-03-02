@@ -1,7 +1,7 @@
 #ifndef __IMAGEMATCHES_H_INCLUDED__
 #define __IMAGEMATCHES_H_INCLUDED__
 
-#include "ImageFeatures.h"
+#include "image_features\ImageFeatures.h"
 
 namespace MapsMerge {
 	class ImagesMatches {

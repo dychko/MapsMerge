@@ -1,4 +1,4 @@
-#include "ImagesMatches.h"
+#include "../../image_matches/ImagesMatches.h"
 #include "RegionsSelector.h"
 
 void MapsMerge::RegionsSelector::leaveRegionsMatches(ImagesMatches& imgsMatches) {

@@ -1,4 +1,4 @@
-#include "ImagesMatches.h"
+#include "../../image_matches/ImagesMatches.h"
 #include "AsiftStrategy.h"
 
 void MapsMerge::AsiftStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
