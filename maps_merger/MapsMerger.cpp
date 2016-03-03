@@ -67,3 +67,11 @@ void MapsMerge::MapsMerger::mergeImages() {
 void MapsMerge::MapsMerger::showMergedImage(string winName) {
 	imagesMatches.showMergedImage(winName);
 }
+
+void MapsMerge::MapsMerger::setQualityEvaluator(QualityEvaluator* e) {
+	qualityEvaluator = e;
+}
+
+void MapsMerge::MapsMerger::evaluateQuality() {
+	qualityEvaluator->evaluateQuality(imagesMatches);
+}

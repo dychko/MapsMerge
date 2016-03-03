@@ -18,7 +18,9 @@ namespace MapsMerge {
 		Mat mergedImages;
 		
 		// For quality measurement
-		Rect interiorRect;		
+		Rect interiorRect;
+
+		double quality;
 
 		void readImages(string imgPath1, string imgPath2);
 		void showImages(string winName1, string winName2);

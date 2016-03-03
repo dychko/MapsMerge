@@ -8,6 +8,7 @@
 #include "../merge_algorithm/regions_selector/RegionsSelector.h"
 #include "../merge_algorithm/image_transformer/ImageTransformer.h"
 #include "../merge_algorithm/images_merger/ImagesMerger.h"
+#include "../merge_algorithm/quality_evaluator/QualityEvaluator.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ namespace MapsMerge {
 		RegionsSelector* regionsSelector;
 		ImageTransformer* imageTransformer;
 		ImagesMerger* imagesMerger;
-		//MapsMerge::QualityEvaluator qualityEvaluator;
+		QualityEvaluator* qualityEvaluator;
 	public:
 		void readImages(std::string imgPath1, std::string imgPath2);
 		void showImages(string winName1, string winName2);
@@ -45,6 +46,9 @@ namespace MapsMerge {
 		void setImagesMerger(ImagesMerger* m);
 		void mergeImages();
 		void showMergedImage(string winName);
+
+		void setQualityEvaluator(QualityEvaluator* e);
+		void evaluateQuality();
 
 	};
 }

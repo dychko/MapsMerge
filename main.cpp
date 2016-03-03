@@ -11,6 +11,7 @@
 #include "merge_algorithm\regions_selector\ManualRegionsSelector.h"
 #include "merge_algorithm\image_transformer\ImageTransformerStrategy.h"
 #include "merge_algorithm\images_merger\ImagesMergerStrategy.h"
+#include "merge_algorithm\quality_evaluator\MSSIM.h"
 
 
 using namespace cv;
@@ -48,6 +49,10 @@ int main(int argc, char** argv) {
 	mapsMerger.setImagesMerger(new ImagesMergerStrategy());
 	mapsMerger.mergeImages();
 	mapsMerger.showMergedImage("Merge result");
+
+	mapsMerger.setQualityEvaluator(new MSSIM());
+	mapsMerger.evaluateQuality();
+	
 
     
     return 0;
