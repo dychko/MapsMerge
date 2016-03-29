@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 	string imgPath2 = "imgs/from-google-cut.jpg";
 
 	MapsMerger mapsMerger;
-
+	if (false) { // TODO: Remove it later
 	mapsMerger.readImages(imgPath1, imgPath2);
 	mapsMerger.showImages("Image 1", "Image 2");
 
@@ -52,7 +52,10 @@ int main(int argc, char** argv) {
 
 	mapsMerger.setQualityEvaluator(new MSSIM());
 	mapsMerger.evaluateQuality();
-	
+	} // TODO: Remove it later
+
+	mapsMerger.setRegionsSelector(new ManualRegionsSelector());
+	mapsMerger.testAlg();
 
     
     return 0;

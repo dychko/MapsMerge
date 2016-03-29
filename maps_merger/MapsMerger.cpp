@@ -75,3 +75,8 @@ void MapsMerge::MapsMerger::setQualityEvaluator(QualityEvaluator* e) {
 void MapsMerge::MapsMerger::evaluateQuality() {
 	qualityEvaluator->evaluateQuality(imagesMatches);
 }
+
+// TODO: Remove it later!
+void MapsMerge::MapsMerger::testAlg() {
+	regionsSelector->testGaleShapleyAlgorithm();
+}
