@@ -2,14 +2,14 @@
 
 #include "../maps_merger/MapsMerger.h"
 
-#include "../merge_algorithm\keypoints_descriptors_extractor\SurfStrategy.h"
-#include "../merge_algorithm\keypoints_descriptors_extractor\SiftStrategy.h"
-#include "../merge_algorithm\keypoints_descriptors_extractor\AsiftStrategy.h"
-#include "../merge_algorithm\descriptors_matcher\FlannMatcherStrategy.h"
-#include "../merge_algorithm\regions_selector\ManualRegionsSelector.h"
-#include "../merge_algorithm\image_transformer\ImageTransformerStrategy.h"
-#include "../merge_algorithm\images_merger\ImagesMergerStrategy.h"
-#include "../merge_algorithm\quality_evaluator\MSSIM.h"
+#include "../merge_algorithm/keypoints_descriptors_extractor/SurfStrategy.h"
+#include "../merge_algorithm/keypoints_descriptors_extractor/SiftStrategy.h"
+#include "../merge_algorithm/keypoints_descriptors_extractor/AsiftStrategy.h"
+#include "../merge_algorithm/descriptors_matcher/FlannMatcherStrategy.h"
+#include "../merge_algorithm/regions_selector/ManualRegionsSelector.h"
+#include "../merge_algorithm/image_transformer/ImageTransformerStrategy.h"
+#include "../merge_algorithm/images_merger/ImagesMergerStrategy.h"
+#include "../merge_algorithm/quality_evaluator/MSSIM.h"
 
 void MapsMerge::GeneralExperiment::run() {
 

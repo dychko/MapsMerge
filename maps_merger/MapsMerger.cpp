@@ -44,6 +44,20 @@ void MapsMerge::MapsMerger::leaveRegionsMatches() {
 	regionsSelector->leaveRegionsMatches(imagesMatches);
 }
 
+void MapsMerge::MapsMerger::setRegionsMatcher(RegionsMatcher* m) {
+	regionsMatcher = m;
+}
+
+void MapsMerge::MapsMerger::matchRegions() {
+	regionsMatcher->matchRegions(imagesMatches);
+}
+
+// TODO: Remove it later!
+void MapsMerge::MapsMerger::testAlg() {
+	regionsMatcher->testGaleShapleyAlgorithm();
+}
+
+
 void MapsMerge::MapsMerger::setImageTransformer(ImageTransformer* t) {
 	imageTransformer = t;
 }
@@ -74,9 +88,4 @@ void MapsMerge::MapsMerger::setQualityEvaluator(QualityEvaluator* e) {
 
 void MapsMerge::MapsMerger::evaluateQuality() {
 	qualityEvaluator->evaluateQuality(imagesMatches);
-}
-
-// TODO: Remove it later!
-void MapsMerge::MapsMerger::testAlg() {
-	regionsSelector->testGaleShapleyAlgorithm();
 }

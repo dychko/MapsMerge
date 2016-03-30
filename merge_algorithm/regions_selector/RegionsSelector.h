@@ -11,8 +11,6 @@ namespace MapsMerge {
 
 		void leaveRegionsMatches(ImagesMatches& imgMatches);
 
-		virtual void testGaleShapleyAlgorithm() = 0; // TODO: Remove it later
-
 	};
 }
 

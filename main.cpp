@@ -12,8 +12,8 @@ using namespace MapsMerge;
 
 int main(int argc, char** argv) {
 
-	AbstractExperiment *generalExperiment = new GeneralExperiment();
-	generalExperiment->run();
+	AbstractExperiment *experiment = new RegionsMatchingExperiment();
+	experiment->run();
 
     return 0;
 }

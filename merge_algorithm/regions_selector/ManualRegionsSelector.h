@@ -25,17 +25,10 @@ namespace MapsMerge {
 		static void checkBoundary(Rect& cropRect, Mat& img);
 		static void onMouse(int event, int x, int y, int f, void* numWindow);
 
-		bool prefers(vector<vector<int>> matrix2, int w, int m, int m1);
-		vector<int> algGaleShapley(vector<vector<int>> matrix1, vector<vector<int>> matrix2);		
-
 	public:
 		ManualRegionsSelector() {};
 
 		void selectRegions(ImagesMatches& imgMatches);
-		
-		void matchRegionsAuto(ImagesMatches& imgMatches); // TODO: Needs implementation
-
-		void testGaleShapleyAlgorithm();
 	};
 }
 

@@ -6,6 +6,7 @@
 #include "../merge_algorithm/keypoints_descriptors_extractor/KeypointsDescriptorsExtractor.h"
 #include "../merge_algorithm/descriptors_matcher/DescriptorsMatcher.h"
 #include "../merge_algorithm/regions_selector/RegionsSelector.h"
+#include "../merge_algorithm/regions_matcher/RegionsMatcher.h"
 #include "../merge_algorithm/image_transformer/ImageTransformer.h"
 #include "../merge_algorithm/images_merger/ImagesMerger.h"
 #include "../merge_algorithm/quality_evaluator/QualityEvaluator.h"
@@ -20,6 +21,7 @@ namespace MapsMerge {
 		KeypointsDescriptorsExtractor* keypointsDescriptorsExtractor;
 		DescriptorsMatcher* descriptorsMatcher;
 		RegionsSelector* regionsSelector;
+		RegionsMatcher* regionsMatcher;
 		ImageTransformer* imageTransformer;
 		ImagesMerger* imagesMerger;
 		QualityEvaluator* qualityEvaluator;
@@ -38,6 +40,9 @@ namespace MapsMerge {
 		void setRegionsSelector(RegionsSelector* s);
 		void selectRegions();
 		void leaveRegionsMatches();
+
+		void setRegionsMatcher(RegionsMatcher* m);
+		void matchRegions();
 		void testAlg(); // TODO: Remove later
 
 		void setImageTransformer(ImageTransformer* t);
