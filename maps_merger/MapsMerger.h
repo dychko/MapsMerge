@@ -30,6 +30,7 @@ namespace MapsMerge {
 		void showImages(string winName1, string winName2);
 		void showKeypoints(string winName1, string winName2);
 		void showMatches(string winName);
+		void showRegions(string winName1, string winName2);
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);
 		void detectAndCompute();
@@ -42,6 +43,7 @@ namespace MapsMerge {
 		void leaveRegionsMatches();
 
 		void setRegionsMatcher(RegionsMatcher* m);
+		void shuffleRegions();
 		void matchRegions();
 		void testAlg(); // TODO: Remove later
 

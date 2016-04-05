@@ -8,6 +8,8 @@ namespace MapsMerge {
 
 	public:
 		virtual void matchRegions(ImagesMatches& imgsMatches) = 0;
+		
+		void shuffleRegions(ImagesMatches& imgsMatches);
 
 		virtual void testGaleShapleyAlgorithm() = 0; // TODO: Remove it later
 

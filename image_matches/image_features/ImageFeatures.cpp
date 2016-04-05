@@ -23,3 +23,14 @@ void MapsMerge::ImageFeatures::showKeypoints(string windowName) {
 	waitKey(0);
 	imgWithKeypoints.release();
 }
+
+void MapsMerge::ImageFeatures::showRegions(string windowName) {
+	Mat imgWithRegions = img.clone();
+	for (int i = 0; i < regions.size(); i++) {
+		rectangle(imgWithRegions, regions[i], Scalar(0, 0, 255), 5, 8, 0);
+		putText(imgWithRegions, to_string(i + 1), regions[i].tl() + Point(-5, -5), 0, 5, Scalar(0, 0, 255), 5);
+	}
+	namedWindow(windowName, WINDOW_NORMAL);
+	imshow(windowName, imgWithRegions);
+	waitKey(0);
+}

@@ -15,6 +15,11 @@ void MapsMerge::ImagesMatches::showKeypoints(string winName1, string winName2) {
 	imgFeatures2.showKeypoints(winName2);
 }
 
+void MapsMerge::ImagesMatches::showRegions(string winName1, string winName2) {
+	imgFeatures1.showRegions(winName1);
+	imgFeatures2.showRegions(winName2);
+}
+
 void MapsMerge::ImagesMatches::showMatches(string winName) {
 	Mat imgMatches;
 	drawMatches(

@@ -19,34 +19,28 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 	string imgPath2 = "imgs/from-google-cut.jpg";
 
 	MapsMerger mapsMerger;
-	//mapsMerger.readImages(imgPath1, imgPath2);
-	//mapsMerger.showImages("Image 1", "Image 2");
+	mapsMerger.readImages(imgPath1, imgPath2);
+	mapsMerger.showImages("Image 1", "Image 2");
 
-	//mapsMerger.setKeypointsDescriptorsExtractor(new SurfStrategy());
-	//mapsMerger.detectAndCompute();
-	//mapsMerger.showKeypoints("Image 1 with keypoints", "Image 2 with keypoints");
+	mapsMerger.setKeypointsDescriptorsExtractor(new SurfStrategy());
+	mapsMerger.detectAndCompute();
+	mapsMerger.showKeypoints("Image 1 with keypoints", "Image 2 with keypoints");
 
-	//mapsMerger.setDescriptorMatcher(new FlannMatcherStrategy());
-	//mapsMerger.matchDescriptors();
-	//mapsMerger.showMatches("Matches");
+	mapsMerger.setDescriptorMatcher(new FlannMatcherStrategy());
+	mapsMerger.matchDescriptors();
+	mapsMerger.showMatches("Matches");
 
-	//mapsMerger.setRegionsSelector(new ManualRegionsSelector());
-
-	//mapsMerger.selectRegions();
-
-
+	mapsMerger.setRegionsSelector(new ManualRegionsSelector());
+	mapsMerger.selectRegions();
 
 	mapsMerger.setRegionsMatcher(new GaleShapleyMatcherStrategy());
 	mapsMerger.testAlg();
 
+	mapsMerger.shuffleRegions();
+	mapsMerger.showRegions("Shuffled regions 1", "Shuffled regions 2");
 
-	// TODO: Shuffle regions
-
-	// TODO: Create matrix of preferences
-
-	// TODO: Match regions by Gale-Shapley algorithm
-
-	// TODO: Show matched regions
+	mapsMerger.matchRegions();
+	mapsMerger.showRegions("Regions 1", "Regions 2");
 
 	// TODO: Add loop
 

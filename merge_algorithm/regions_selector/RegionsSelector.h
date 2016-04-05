@@ -9,7 +9,7 @@ namespace MapsMerge {
 	public:
 		virtual void selectRegions(ImagesMatches& imgMatches) = 0;
 
-		void leaveRegionsMatches(ImagesMatches& imgMatches);
+		static vector<DMatch> leaveRegionsMatches(ImagesMatches&, vector<Rect>, vector<Rect>);
 
 	};
 }

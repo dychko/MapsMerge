@@ -11,8 +11,10 @@ namespace MapsMerge {
 	class GaleShapleyMatcherStrategy : public MapsMerge::RegionsMatcher {
 	
 	private:
+		vector<int> findPreferences(const vector<int> numMatches);
 		bool prefers(vector<vector<int>> matrix2, int w, int m, int m1);
 		vector<int> algGaleShapley(vector<vector<int>> matrix1, vector<vector<int>> matrix2);
+		vector<vector<vector<int>>> createNumMatchesMatrices(ImagesMatches& imgsMatches);
 	
 	public:
 		void matchRegions(ImagesMatches& imgsMatches);

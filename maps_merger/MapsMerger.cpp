@@ -12,6 +12,10 @@ void MapsMerge::MapsMerger::showKeypoints(string winName1, string winName2) {
 	imagesMatches.showKeypoints(winName1, winName2);
 }
 
+void MapsMerge::MapsMerger::showRegions(string winName1, string winName2) {
+	imagesMatches.showRegions(winName1, winName2);
+}
+
 void MapsMerge::MapsMerger::setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e) {
 	keypointsDescriptorsExtractor = e;
 }
@@ -41,11 +45,18 @@ void MapsMerge::MapsMerger::selectRegions() {
 }
 
 void MapsMerge::MapsMerger::leaveRegionsMatches() {
-	regionsSelector->leaveRegionsMatches(imagesMatches);
+	imagesMatches.goodMatches = regionsSelector->leaveRegionsMatches(
+		imagesMatches,
+		imagesMatches.imgFeatures1.regions, 
+		imagesMatches.imgFeatures2.regions);
 }
 
 void MapsMerge::MapsMerger::setRegionsMatcher(RegionsMatcher* m) {
 	regionsMatcher = m;
+}
+
+void MapsMerge::MapsMerger::shuffleRegions() {
+	regionsMatcher->shuffleRegions(imagesMatches);
 }
 
 void MapsMerge::MapsMerger::matchRegions() {

@@ -15,5 +15,5 @@ int main(int argc, char** argv) {
 	AbstractExperiment *experiment = new RegionsMatchingExperiment();
 	experiment->run();
 
-    return 0;
+	return 0;
 }

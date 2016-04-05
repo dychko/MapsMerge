@@ -1,5 +1,6 @@
 #include "../../image_matches/ImagesMatches.h"
 #include "GaleShapleyMatcherStrategy.h"
+#include "../regions_selector/RegionsSelector.h"
 
 bool MapsMerge::GaleShapleyMatcherStrategy::prefers(vector<vector<int>> matrix2, int w, int m, int m1) {
 	for (int i = 0; i < matrix2[0].size(); i++) {
@@ -117,7 +118,95 @@ void MapsMerge::GaleShapleyMatcherStrategy::testGaleShapleyAlgorithm() {
 	}
 }
 
+bool comparePair(const pair<int, int>  &p1, const pair<int, int> &p2) {
+	return p1.second > p2.second;
+}
 
-void MapsMerge::GaleShapleyMatcherStrategy::matchRegions(ImagesMatches& imgsMatches) {
-	// TODO: Needs implementation
+vector<int> MapsMerge::GaleShapleyMatcherStrategy::findPreferences(const vector<int> numMatches) {
+	int length = numMatches.size();
+	vector<pair<int, int>> vecPairsNumMatches(length);
+	for(int i = 0; i < length; i++) {
+		vecPairsNumMatches[i] = pair<int,int>(i, numMatches[i]);
+	}
+
+	sort(vecPairsNumMatches.begin(), vecPairsNumMatches.end(), comparePair);	
+	
+	vector<int> preferences(length);
+	for (int i = 0; i < length; i++) {
+		preferences[i] = vecPairsNumMatches[i].first;
+	}
+
+	return preferences;
+}
+
+vector<vector<vector<int>>> MapsMerge::GaleShapleyMatcherStrategy::createNumMatchesMatrices(ImagesMatches& imgsMatches) {
+	vector<vector<vector<int>>> numMatchesMatrices;
+
+	// Build matrices with matches quantity
+
+	const int numRegions1 = imgsMatches.imgFeatures1.regions.size();
+	const int numRegions2 = imgsMatches.imgFeatures2.regions.size();
+
+	vector<vector<int>> numMatchesRegions12(numRegions1, vector<int>(numRegions2));
+	vector<vector<int>> numMatchesRegions21(numRegions2, vector<int>(numRegions1));
+
+	for (int i = 0; i < numRegions1; i++) {
+		vector<Rect> oneRegion1(1, imgsMatches.imgFeatures1.regions[i]);
+		for (int j = 0; j  < numRegions2; j ++) {
+			vector<Rect> oneRegion2(1, imgsMatches.imgFeatures2.regions[j]);
+			numMatchesRegions12[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion1, oneRegion2).size();
+			numMatchesRegions21[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion2, oneRegion1).size();			
+		}
+	}
+
+	// Build preferences matrices
+
+	for (int i = 0; i < numRegions1; i++) {
+		numMatchesRegions12[i] = findPreferences(numMatchesRegions12[i]);
+		numMatchesRegions21[i] = findPreferences(numMatchesRegions21[i]);
+	}
+
+	numMatchesMatrices.push_back(numMatchesRegions12);
+	numMatchesMatrices.push_back(numMatchesRegions21);
+
+	return numMatchesMatrices;
+}
+
+void MapsMerge::GaleShapleyMatcherStrategy::matchRegions(ImagesMatches& imgsMatches) {	
+	
+	// Create matrices of preferences
+	vector<vector<vector<int>>> numMatchesMatrices = createNumMatchesMatrices(imgsMatches);
+
+
+	// Start logging
+	cout <<  "\n Matrices of preferences \n" << endl;
+	cout << "Matrix 1" << endl;
+	for (int i = 0; i < numMatchesMatrices[0].size(); i++) {
+		cout << "[ ";
+		for (int j = 0; j < numMatchesMatrices[0][0].size(); j++) {
+			cout << numMatchesMatrices[0][i][j] << ((numMatchesMatrices[0][0].size()-1!=j)?(", "):(""));
+		}
+		cout << " ]\n";
+	}
+
+
+	cout << "Matrix 2" << endl;
+	for (int i = 0; i < numMatchesMatrices[1].size(); i++) {
+		cout << "[ ";
+		for (int j = 0; j < numMatchesMatrices[1][0].size(); j++) {
+			cout << numMatchesMatrices[1][i][j] << ((numMatchesMatrices[1][0].size()-1!=j)?(", "):(""));
+		}
+		cout << " ]\n";
+	}
+	// End logging
+
+
+	// Match regions by Gale-Shapley 
+	vector<int> regionsMatches = algGaleShapley(numMatchesMatrices[0], numMatchesMatrices[1]);
+
+	// Set regions according to matches
+	vector<Rect> copyRects1(imgsMatches.imgFeatures1.regions);
+	for (int i = 0; i < copyRects1.size(); i++) {
+		imgsMatches.imgFeatures1.regions[i] = copyRects1[regionsMatches[i]];
+	}
 }
