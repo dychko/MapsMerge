@@ -1,6 +1,7 @@
 #include "../../image_matches/ImagesMatches.h"
 #include "GaleShapleyMatcherStrategy.h"
 #include "../regions_selector/RegionsSelector.h"
+#include "../../utils/Utils.h"
 
 bool MapsMerge::GaleShapleyMatcherStrategy::prefers(vector<vector<int>> matrix2, int w, int m, int m1) {
 	for (int i = 0; i < matrix2[0].size(); i++) {
@@ -86,23 +87,8 @@ void MapsMerge::GaleShapleyMatcherStrategy::testGaleShapleyAlgorithm() {
 	matrix2[2][0] = 0; matrix2[2][1] = 1; matrix2[2][2] = 2; matrix2[2][3] = 3;
 	matrix2[3][0] = 0; matrix2[3][1] = 1; matrix2[3][2] = 2; matrix2[3][3] = 3;
 
-	cout << "Matrix 1" << endl;
-	for (int i = 0; i < 4; i++) {
-		cout << "[ ";
-		for (int j = 0; j < 4; j++) {
-			cout << matrix1[i][j] << ((j!=3)?(", "):(""));
-		}
-		cout << " ]\n";
-	}
-
-	cout << "Matrix 2" << endl;
-	for (int i = 0; i < 4; i++) {
-		cout << "[ ";
-		for (int j = 0; j < 4; j++) {
-			cout << matrix2[i][j] << ((j!=3)?(", "):(""));
-		}
-		cout << " ]\n";
-	}
+	Utils::printMatrix("Matrix 1", matrix1);
+	Utils::printMatrix("Matrix 2", matrix2);
 
 	cout << "After initialization" << endl;
 	
@@ -180,24 +166,8 @@ void MapsMerge::GaleShapleyMatcherStrategy::matchRegions(ImagesMatches& imgsMatc
 
 	// Start logging
 	cout <<  "\n Matrices of preferences \n" << endl;
-	cout << "Matrix 1" << endl;
-	for (int i = 0; i < numMatchesMatrices[0].size(); i++) {
-		cout << "[ ";
-		for (int j = 0; j < numMatchesMatrices[0][0].size(); j++) {
-			cout << numMatchesMatrices[0][i][j] << ((numMatchesMatrices[0][0].size()-1!=j)?(", "):(""));
-		}
-		cout << " ]\n";
-	}
-
-
-	cout << "Matrix 2" << endl;
-	for (int i = 0; i < numMatchesMatrices[1].size(); i++) {
-		cout << "[ ";
-		for (int j = 0; j < numMatchesMatrices[1][0].size(); j++) {
-			cout << numMatchesMatrices[1][i][j] << ((numMatchesMatrices[1][0].size()-1!=j)?(", "):(""));
-		}
-		cout << " ]\n";
-	}
+	Utils::printMatrix("Matrix 1", numMatchesMatrices[0]);
+	Utils::printMatrix("Matrix 2", numMatchesMatrices[1]);
 	// End logging
 
 

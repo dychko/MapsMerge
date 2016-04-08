@@ -16,7 +16,7 @@ using namespace std;
 namespace MapsMerge {
 	class MapsMerger {
 
-	private:
+	protected:
 		ImagesMatches imagesMatches;
 		KeypointsDescriptorsExtractor* keypointsDescriptorsExtractor;
 		DescriptorsMatcher* descriptorsMatcher;
@@ -41,6 +41,8 @@ namespace MapsMerge {
 		void setRegionsSelector(RegionsSelector* s);
 		void selectRegions();
 		void leaveRegionsMatches();
+
+		int getNumRegions();
 
 		void setRegionsMatcher(RegionsMatcher* m);
 		void shuffleRegions();

@@ -51,6 +51,10 @@ void MapsMerge::MapsMerger::leaveRegionsMatches() {
 		imagesMatches.imgFeatures2.regions);
 }
 
+int MapsMerge::MapsMerger::getNumRegions() {
+	return imagesMatches.imgFeatures1.regions.size();
+}
+
 void MapsMerge::MapsMerger::setRegionsMatcher(RegionsMatcher* m) {
 	regionsMatcher = m;
 }

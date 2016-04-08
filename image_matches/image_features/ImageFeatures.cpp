@@ -1,6 +1,5 @@
 #include "ImageFeatures.h"
 
-
 void MapsMerge::ImageFeatures::readImage(string imgPath) {
 	img = imread(imgPath, CV_LOAD_IMAGE_GRAYSCALE);
 	if (!img.data) {
@@ -33,4 +32,8 @@ void MapsMerge::ImageFeatures::showRegions(string windowName) {
 	namedWindow(windowName, WINDOW_NORMAL);
 	imshow(windowName, imgWithRegions);
 	waitKey(0);
+}
+
+void MapsMerge::ImageFeatures::shuffeRegions() {
+	random_shuffle(regions.begin(), regions.end());
 }
