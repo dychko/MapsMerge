@@ -125,51 +125,21 @@ vector<int> MapsMerge::GaleShapleyMatcherStrategy::findPreferences(const vector<
 	return preferences;
 }
 
-vector<vector<vector<int>>> MapsMerge::GaleShapleyMatcherStrategy::createNumMatchesMatrices(ImagesMatches& imgsMatches) {
-	vector<vector<vector<int>>> numMatchesMatrices;
-
-	// Build matrices with matches quantity
-
-	const int numRegions1 = imgsMatches.imgFeatures1.regions.size();
-	const int numRegions2 = imgsMatches.imgFeatures2.regions.size();
-
-	vector<vector<int>> numMatchesRegions12(numRegions1, vector<int>(numRegions2));
-	vector<vector<int>> numMatchesRegions21(numRegions2, vector<int>(numRegions1));
-
-	for (int i = 0; i < numRegions1; i++) {
-		vector<Rect> oneRegion1(1, imgsMatches.imgFeatures1.regions[i]);
-		for (int j = 0; j  < numRegions2; j ++) {
-			vector<Rect> oneRegion2(1, imgsMatches.imgFeatures2.regions[j]);
-			numMatchesRegions12[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion1, oneRegion2).size();
-			numMatchesRegions21[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion2, oneRegion1).size();			
-		}
-	}
-
-	// Build preferences matrices
-
-	for (int i = 0; i < numRegions1; i++) {
-		numMatchesRegions12[i] = findPreferences(numMatchesRegions12[i]);
-		numMatchesRegions21[i] = findPreferences(numMatchesRegions21[i]);
-	}
-
-	numMatchesMatrices.push_back(numMatchesRegions12);
-	numMatchesMatrices.push_back(numMatchesRegions21);
-
-	return numMatchesMatrices;
-}
-
 void MapsMerge::GaleShapleyMatcherStrategy::matchRegions(ImagesMatches& imgsMatches) {	
 	
-	// Create matrices of preferences
+	// Create matrices with matches quantity
 	vector<vector<vector<int>>> numMatchesMatrices = createNumMatchesMatrices(imgsMatches);
 
+	// Some test transformations
+	vector<vector<int>> matchesMatrix = Utils::sumMatrices(numMatchesMatrices[0], Utils::transpose(numMatchesMatrices[1]));
+	numMatchesMatrices[0] = matchesMatrix;
+	numMatchesMatrices[1] = Utils::transpose(matchesMatrix);
 
-	// Start logging
-	cout <<  "\n Matrices of preferences \n" << endl;
-	Utils::printMatrix("Matrix 1", numMatchesMatrices[0]);
-	Utils::printMatrix("Matrix 2", numMatchesMatrices[1]);
-	// End logging
-
+	// Build preferences matrices
+	for (int i = 0; i < imgsMatches.imgFeatures1.regions.size(); i++) {
+		numMatchesMatrices[0][i] = findPreferences(numMatchesMatrices[0][i]);
+		numMatchesMatrices[1][i] = findPreferences(numMatchesMatrices[1][i]);
+	}
 
 	// Match regions by Gale-Shapley 
 	vector<int> regionsMatches = algGaleShapley(numMatchesMatrices[0], numMatchesMatrices[1]);

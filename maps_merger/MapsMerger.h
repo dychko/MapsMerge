@@ -47,7 +47,6 @@ namespace MapsMerge {
 		void setRegionsMatcher(RegionsMatcher* m);
 		void shuffleRegions();
 		void matchRegions();
-		void testAlg(); // TODO: Remove later
 
 		void setImageTransformer(ImageTransformer* t);
 		void transformImage();

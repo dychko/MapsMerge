@@ -1,5 +1,6 @@
 #include "RegionsMatchingExperiment.h"
 #include <iostream>
+#include <ctime>
 
 #include "../maps_merger/MapsMerger.h"
 
@@ -9,15 +10,37 @@
 #include "../merge_algorithm/descriptors_matcher/FlannMatcherStrategy.h"
 #include "../merge_algorithm/regions_selector/ManualRegionsSelector.h"
 #include "../merge_algorithm/regions_matcher/GaleShapleyMatcherStrategy.h"
+#include "../merge_algorithm/regions_matcher/SimpleMatcherStrategy.h"
 #include "../merge_algorithm/image_transformer/ImageTransformerStrategy.h"
 #include "../merge_algorithm/images_merger/ImagesMergerStrategy.h"
 #include "../merge_algorithm/quality_evaluator/MSSIM.h"
 
 #include "../utils/Utils.h"
+#include "../utils/Statistics.h"
+
+void MapsMerge::RegionsMatchingExperiment::setRegionsByIndexes(vector<Rect> savedRegions1, 
+															   vector<Rect> savedRegions2, 
+															   vector<int> regionsIndexes) {
+	this->imagesMatches.imgFeatures1.regions.clear();
+	this->imagesMatches.imgFeatures2.regions.clear();
+	for (int i = 0; i < regionsIndexes.size(); i++) {
+		this->imagesMatches.imgFeatures1.regions.push_back(savedRegions1[regionsIndexes[i]]);
+		this->imagesMatches.imgFeatures2.regions.push_back(savedRegions2[regionsIndexes[i]]);
+	}
+}
+
+double MapsMerge::RegionsMatchingExperiment::getRelativeCorrectness(vector<Rect> originalRegions, vector<Rect> matchedRegions) {
+	int numCorrectRegionsMatches = 0;
+	for (int i = 0; i < originalRegions.size(); i++) {
+		if (originalRegions[i] == matchedRegions[i]) {
+			numCorrectRegionsMatches++;
+		}
+	}
+	double regionsMatchesCorrectness = (double)numCorrectRegionsMatches / originalRegions.size();
+	return regionsMatchesCorrectness;
+}
 
 void MapsMerge::RegionsMatchingExperiment::run() {
-
-	// Getting needed data
 	
 	string imgPath1 = "imgs/ap-GOPR9460.jpg";
 	string imgPath2 = "imgs/from-google-cut.jpg";
@@ -35,17 +58,6 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 
 	this->setRegionsSelector(new ManualRegionsSelector());
 	this->selectRegions();
-
-	// TODO: Maybe use it later
-	//this->setRegionsMatcher(new GaleShapleyMatcherStrategy());
-	//this->testAlg();
-
-	//this->shuffleRegions();
-	//this->showRegions("Shuffled regions 1", "Shuffled regions 2");
-
-	//this->matchRegions();
-	//this->showRegions("Regions 1", "Regions 2");
-	//
 	
 	// Experiments
 
@@ -54,76 +66,56 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 	vector<Rect> allSavedRegions1 = this->imagesMatches.imgFeatures1.regions;
 	vector<Rect> allSavedRegions2 = this->imagesMatches.imgFeatures2.regions;
 	
-	
-	int experimentId = 1;
-	double averageCorrectness = 0;
+	Statistics stats("experiments_results/regions_matching_experiment_" + Utils::getTimeStr() + ".csv", 3);
+	stats.addField("Id")
+		 .addField("Regions matches correctness 1")
+		 .addField("Regions matches correctness 2");
+
+	int experimentId = 0;
+	double averageCorrectness1 = 0;
+	double averageCorrectness2 = 0;
 	for(int iRegionsBatch = 0; iRegionsBatch < regionsIndexes.size(); iRegionsBatch++) {
-		// Set batches of regions
+		experimentId++;
+		vector<int> regionsBatchIndexes = regionsIndexes[iRegionsBatch];
+		
+		// Set batch of regions
+		setRegionsByIndexes(allSavedRegions1, allSavedRegions2, regionsBatchIndexes);
+		vector<Rect> copyRegions(this->imagesMatches.imgFeatures1.regions);
 
-			// TODO: This may need refactoring
-			// E.g. create function setRegionsByIndexes
-		this->imagesMatches.imgFeatures1.regions.clear();
-		this->imagesMatches.imgFeatures2.regions.clear();
-		for (int i = 0; i < regionsIndexes[iRegionsBatch].size(); i++) {
-			this->imagesMatches.imgFeatures1.regions.push_back(allSavedRegions1[regionsIndexes[iRegionsBatch][i]]);
-			this->imagesMatches.imgFeatures2.regions.push_back(allSavedRegions2[regionsIndexes[iRegionsBatch][i]]);
-		}
-
-		// Shuffle regions
-
+		// Shuffle and create copy of regions
 		this->imagesMatches.imgFeatures1.shuffeRegions();
+		vector<Rect> copyShuffledRegions(this->imagesMatches.imgFeatures1.regions);
 
-		// Match regions
-
+		// Match regions with Gale-Shapley
 		this->setRegionsMatcher(new GaleShapleyMatcherStrategy());
 		this->matchRegions();
 
-			// Use second algorithm
+		// Check correctness
+
+		// Restore shuffled regions configuration
+		this->imagesMatches.imgFeatures1.regions = copyShuffledRegions;
+
+		// Match regions with Simple algorithm
+		this->setRegionsMatcher(new SimpleMatcherStrategy());
+		this->matchRegions();
+
+		// Check correctness
+
+		// Compute average	
+		averageCorrectness1 += regionsMatchesCorrectness1 / regionsIndexes.size();
+		averageCorrectness2 += regionsMatchesCorrectness2 / regionsIndexes.size();
 
 		// Save results
-		// Check correctness		
-		int numCorrectRegionsMatches = 0;
-		int numAllRegionsMatches = regionsIndexes[iRegionsBatch].size();
-
-		for (int i = 0; i < numAllRegionsMatches; i++) {
-			if (this->imagesMatches.imgFeatures1.regions[i] == allSavedRegions1[regionsIndexes[iRegionsBatch][i]]) {
-				numCorrectRegionsMatches++;
-			}
-		}
-
-		double regionsMatchesCorrectness = (double)numCorrectRegionsMatches / numAllRegionsMatches;
-
-		cout << experimentId << ". Correctness: " << regionsMatchesCorrectness << " %" << endl;
-
-		experimentId++;
-
-		averageCorrectness += regionsMatchesCorrectness / regionsIndexes.size();
-
+		stats.addField(experimentId)
+			 .addField(regionsMatchesCorrectness1)
+			 .addField(regionsMatchesCorrectness2);
 	}
 
-	cout << "Average correctness: " << averageCorrectness << endl;
-		
-	
-	//mapsMerger.matchRegions();
-	//mapsMerger.showRegions("Regions 1", "Regions 2");
+	// Save results
+	stats.addField("Average correctness:")
+		 .addField(averageCorrectness1)
+		 .addField(averageCorrectness2);
 
-	// TODO: Remove the following method call
-	// mapsMerger.leaveRegionsMatches();
-
-	//mapsMerger.setImageTransformer(new ImageTransformerStrategy());
-	//mapsMerger.transformImage();
-
-	//mapsMerger.showTransformedImage("Transformed image");
-
-	//mapsMerger.setImagesMerger(new ImagesMergerStrategy());
-	//mapsMerger.mergeImages();
-	//mapsMerger.showMergedImage("Merge result");
-
-	//mapsMerger.setQualityEvaluator(new MSSIM());
-	//mapsMerger.evaluateQuality();
-		
-	//mapsMerger.setRegionsSelector(new ManualRegionsSelector());
-	//mapsMerger.testAlg();
-
+	stats.closeFile();
 
 }

@@ -49,3 +49,4 @@ MapsMerge.vcxproj.filters
 MapsMerge.vcxproj.user
 experiments/SomeExperiment.cpp
 experiments/SomeExperiment.h
+experiments_results
