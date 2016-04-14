@@ -91,6 +91,7 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 		this->matchRegions();
 
 		// Check correctness
+		double regionsMatchesCorrectness1 = getRelativeCorrectness(copyRegions, this->imagesMatches.imgFeatures1.regions);
 
 		// Restore shuffled regions configuration
 		this->imagesMatches.imgFeatures1.regions = copyShuffledRegions;
@@ -100,6 +101,7 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 		this->matchRegions();
 
 		// Check correctness
+		double regionsMatchesCorrectness2 = getRelativeCorrectness(copyRegions, this->imagesMatches.imgFeatures1.regions);
 
 		// Compute average	
 		averageCorrectness1 += regionsMatchesCorrectness1 / regionsIndexes.size();
