@@ -26,9 +26,11 @@ namespace MapsMerge {
 		void showImages(string winName1, string winName2);
 		void showKeypoints(string winName1, string winName2);
 		void showRegions(string winName1, string winName2);
+		void writeRegions(string fileName1, string fileName2);
 		void showMatches(string winName);
 		void showTransformedImage(string winName);
 		void showMergedImage(string winName);
+		void writeMergedImage(string fileName);
 	};
 }
 

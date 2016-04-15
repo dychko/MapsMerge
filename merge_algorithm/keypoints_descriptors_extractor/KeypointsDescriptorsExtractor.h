@@ -8,6 +8,7 @@ namespace MapsMerge {
 
 	public:
 		virtual void detectAndCompute(ImagesMatches& imgsMatches) = 0;
+		virtual string getAlgName() = 0;
 	};
 }
 

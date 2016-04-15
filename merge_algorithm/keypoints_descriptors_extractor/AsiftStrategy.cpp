@@ -21,3 +21,7 @@ void MapsMerge::AsiftStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
 		imgsMatches.imgFeatures2.descriptors);
 
 }
+
+string MapsMerge::AsiftStrategy::getAlgName() {
+	return "ASIFT";
+}

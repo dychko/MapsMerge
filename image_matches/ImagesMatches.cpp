@@ -20,6 +20,11 @@ void MapsMerge::ImagesMatches::showRegions(string winName1, string winName2) {
 	imgFeatures2.showRegions(winName2);
 }
 
+void MapsMerge::ImagesMatches::writeRegions(string fileName1, string fileName2) {
+	imgFeatures1.writeRegions(fileName1);
+	imgFeatures2.writeRegions(fileName2);
+}
+
 void MapsMerge::ImagesMatches::showMatches(string winName) {
 	Mat imgMatches;
 	drawMatches(
@@ -42,4 +47,8 @@ void MapsMerge::ImagesMatches::showMergedImage(string windowName) {
 	namedWindow(windowName, WINDOW_NORMAL);
 	imshow(windowName, mergedImages);
 	waitKey(0);
+}
+
+void MapsMerge::ImagesMatches::writeMergedImage(string fileName) {
+	imwrite(fileName, mergedImages);
 }

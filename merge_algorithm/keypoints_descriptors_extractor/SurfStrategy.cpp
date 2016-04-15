@@ -27,3 +27,7 @@ void MapsMerge::SurfStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
 		imgsMatches.imgFeatures2.descriptors);
 
 }
+
+string MapsMerge::SurfStrategy::getAlgName() {
+	return "SURF";
+}

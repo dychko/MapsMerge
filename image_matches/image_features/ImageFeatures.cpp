@@ -34,6 +34,14 @@ void MapsMerge::ImageFeatures::showRegions(string windowName) {
 	waitKey(0);
 }
 
+void MapsMerge::ImageFeatures::writeRegions(string fileName) {
+	Mat imgWithRegions = img.clone();
+	for (int i = 0; i < regions.size(); i++) {
+		rectangle(imgWithRegions, regions[i], Scalar(0, 0, 255), 5, 8, 0);
+	}
+	imwrite(fileName, imgWithRegions);
+}
+
 void MapsMerge::ImageFeatures::shuffeRegions() {
 	random_shuffle(regions.begin(), regions.end());
 }

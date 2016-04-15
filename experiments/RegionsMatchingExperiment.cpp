@@ -18,17 +18,6 @@
 #include "../utils/Utils.h"
 #include "../utils/Statistics.h"
 
-void MapsMerge::RegionsMatchingExperiment::setRegionsByIndexes(vector<Rect> savedRegions1, 
-															   vector<Rect> savedRegions2, 
-															   vector<int> regionsIndexes) {
-	this->imagesMatches.imgFeatures1.regions.clear();
-	this->imagesMatches.imgFeatures2.regions.clear();
-	for (int i = 0; i < regionsIndexes.size(); i++) {
-		this->imagesMatches.imgFeatures1.regions.push_back(savedRegions1[regionsIndexes[i]]);
-		this->imagesMatches.imgFeatures2.regions.push_back(savedRegions2[regionsIndexes[i]]);
-	}
-}
-
 double MapsMerge::RegionsMatchingExperiment::getRelativeCorrectness(vector<Rect> originalRegions, vector<Rect> matchedRegions) {
 	int numCorrectRegionsMatches = 0;
 	for (int i = 0; i < originalRegions.size(); i++) {
@@ -79,7 +68,7 @@ void MapsMerge::RegionsMatchingExperiment::run() {
 		vector<int> regionsBatchIndexes = regionsIndexes[iRegionsBatch];
 		
 		// Set batch of regions
-		setRegionsByIndexes(allSavedRegions1, allSavedRegions2, regionsBatchIndexes);
+		this->setRegionsByIndexes(allSavedRegions1, allSavedRegions2, regionsBatchIndexes);
 		vector<Rect> copyRegions(this->imagesMatches.imgFeatures1.regions);
 
 		// Shuffle and create copy of regions

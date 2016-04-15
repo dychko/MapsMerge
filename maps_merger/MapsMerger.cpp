@@ -16,12 +16,20 @@ void MapsMerge::MapsMerger::showRegions(string winName1, string winName2) {
 	imagesMatches.showRegions(winName1, winName2);
 }
 
+void MapsMerge::MapsMerger::writeRegions(string fileName1, string fileName2) {
+	imagesMatches.writeRegions(fileName1, fileName2);
+}
+
 void MapsMerge::MapsMerger::setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e) {
 	keypointsDescriptorsExtractor = e;
 }
 
 void MapsMerge::MapsMerger::detectAndCompute() {
 	keypointsDescriptorsExtractor->detectAndCompute(imagesMatches);
+}
+
+string MapsMerge::MapsMerger::getExtractorAlgName() {
+	return keypointsDescriptorsExtractor->getAlgName();
 }
 
 void MapsMerge::MapsMerger::setDescriptorMatcher(DescriptorsMatcher* d) {
@@ -91,10 +99,25 @@ void MapsMerge::MapsMerger::showMergedImage(string winName) {
 	imagesMatches.showMergedImage(winName);
 }
 
+void MapsMerge::MapsMerger::writeMergedImage(string fileName) {
+	imagesMatches.writeMergedImage(fileName);
+}
+
 void MapsMerge::MapsMerger::setQualityEvaluator(QualityEvaluator* e) {
 	qualityEvaluator = e;
 }
 
 void MapsMerge::MapsMerger::evaluateQuality() {
 	qualityEvaluator->evaluateQuality(imagesMatches);
+}
+
+void MapsMerge::MapsMerger::setRegionsByIndexes(vector<Rect>& savedRegions1, 
+												vector<Rect>& savedRegions2, 
+												vector<int>& regionsIndexes) {
+	this->imagesMatches.imgFeatures1.regions.clear();
+	this->imagesMatches.imgFeatures2.regions.clear();
+	for (int i = 0; i < regionsIndexes.size(); i++) {
+		this->imagesMatches.imgFeatures1.regions.push_back(savedRegions1[regionsIndexes[i]]);
+		this->imagesMatches.imgFeatures2.regions.push_back(savedRegions2[regionsIndexes[i]]);
+	}
 }

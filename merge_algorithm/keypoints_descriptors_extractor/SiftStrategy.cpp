@@ -26,3 +26,7 @@ void MapsMerge::SiftStrategy::detectAndCompute(ImagesMatches& imgsMatches) {
 		imgsMatches.imgFeatures2.descriptors);
 
 }
+
+string MapsMerge::SiftStrategy::getAlgName() {
+	return "SIFT";
+}

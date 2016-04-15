@@ -4,6 +4,7 @@
 
 void MapsMerge::ImageTransformerStrategy::transformImage(ImagesMatches& imgsMatches) {
 
+	try {
 	// Localize the object from img1 in img2
 
 	vector<Point2f> obj;
@@ -40,6 +41,9 @@ void MapsMerge::ImageTransformerStrategy::transformImage(ImagesMatches& imgsMatc
 		imgsMatches.interiorRect = Rect(0, 0, 0, 0);
 	} else {
 		imgsMatches.interiorRect = cropRectCustom(sceneCorners, Rect(0, 0, imgsMatches.imgFeatures2.img.cols, imgsMatches.imgFeatures2.img.rows));
+	}
+	} catch (...) {
+		cerr << "Exception raised in \"transformImage\" method." << endl;
 	}
 
 }

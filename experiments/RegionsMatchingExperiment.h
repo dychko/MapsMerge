@@ -10,7 +10,6 @@ namespace MapsMerge {
 	class RegionsMatchingExperiment : public MapsMerge::AbstractExperiment, public MapsMerge::MapsMerger {
 
 	private: 
-		void setRegionsByIndexes(vector<Rect> savedRegions1, vector<Rect> savedRegions2, vector<int> regionsIndexes);
 		double getRelativeCorrectness(vector<Rect> originalRegions, vector<Rect> matchedRegions);
 
 	public:

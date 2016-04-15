@@ -14,6 +14,7 @@ namespace MapsMerge {
 
 	public:
 		void detectAndCompute(ImagesMatches& imgsMatches);
+		string getAlgName();
 	
 	};
 }

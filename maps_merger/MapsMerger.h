@@ -16,8 +16,9 @@ using namespace std;
 namespace MapsMerge {
 	class MapsMerger {
 
+	public:
+		ImagesMatches imagesMatches; // TODO: Maybe change it back
 	protected:
-		ImagesMatches imagesMatches;
 		KeypointsDescriptorsExtractor* keypointsDescriptorsExtractor;
 		DescriptorsMatcher* descriptorsMatcher;
 		RegionsSelector* regionsSelector;
@@ -31,9 +32,11 @@ namespace MapsMerge {
 		void showKeypoints(string winName1, string winName2);
 		void showMatches(string winName);
 		void showRegions(string winName1, string winName2);
+		void writeRegions(string fileName1, string fileName2);
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);
 		void detectAndCompute();
+		string getExtractorAlgName();
 
 		void setDescriptorMatcher(DescriptorsMatcher* d);
 		void matchDescriptors();
@@ -55,9 +58,12 @@ namespace MapsMerge {
 		void setImagesMerger(ImagesMerger* m);
 		void mergeImages();
 		void showMergedImage(string winName);
+		void writeMergedImage(string fileName);
 
 		void setQualityEvaluator(QualityEvaluator* e);
 		void evaluateQuality();
+
+		void setRegionsByIndexes(vector<Rect>& regions1, vector<Rect>& regions2, vector<int>& regionsIndexes);
 
 	};
 }

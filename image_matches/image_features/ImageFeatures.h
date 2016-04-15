@@ -25,6 +25,7 @@ namespace MapsMerge {
 		void showImage(string windowName);
 		void showKeypoints(string windowName);
 		void showRegions(string windowName);
+		void writeRegions(string fileName);
 
 		void shuffeRegions();
 
