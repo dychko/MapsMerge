@@ -33,6 +33,8 @@ void MapsMerge::GeneralExperiment::run() {
 	mapsMerger.selectRegions();
 	mapsMerger.leaveRegionsMatches();
 
+	mapsMerger.showGoodMatches("Good matches");
+
 	mapsMerger.setImageTransformer(new ImageTransformerStrategy());
 	mapsMerger.transformImage();
 

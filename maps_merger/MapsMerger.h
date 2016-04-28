@@ -31,7 +31,9 @@ namespace MapsMerge {
 		void showImages(string winName1, string winName2);
 		void showKeypoints(string winName1, string winName2);
 		void showMatches(string winName);
+		void showGoodMatches(string winName);
 		void showRegions(string winName1, string winName2);
+		void showClusters(string winName1, string winName2);
 		void writeRegions(string fileName1, string fileName2);
 
 		void setKeypointsDescriptorsExtractor(KeypointsDescriptorsExtractor* e);

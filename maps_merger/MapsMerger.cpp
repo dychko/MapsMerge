@@ -16,6 +16,10 @@ void MapsMerge::MapsMerger::showRegions(string winName1, string winName2) {
 	imagesMatches.showRegions(winName1, winName2);
 }
 
+void MapsMerge::MapsMerger::showClusters(string winName1, string winName2) {
+	imagesMatches.showClusters(winName1, winName2);
+}
+
 void MapsMerge::MapsMerger::writeRegions(string fileName1, string fileName2) {
 	imagesMatches.writeRegions(fileName1, fileName2);
 }
@@ -42,6 +46,10 @@ void MapsMerge::MapsMerger::matchDescriptors() {
 
 void MapsMerge::MapsMerger::showMatches(string winName) {
 	imagesMatches.showMatches(winName);
+}
+
+void MapsMerge::MapsMerger::showGoodMatches(string winName) {
+	imagesMatches.showGoodMatches(winName);
 }
 
 void MapsMerge::MapsMerger::setRegionsSelector(RegionsSelector* s) {

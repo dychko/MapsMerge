@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <algorithm>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ namespace MapsMerge {
 		static vector<vector<int>> transpose(vector<vector<int>> matrix);
 		static vector<vector<int>> sumMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2);
 		static string getTimeStr();
+		static int maxElement(vector<int>& vec);
 
 	};
 }

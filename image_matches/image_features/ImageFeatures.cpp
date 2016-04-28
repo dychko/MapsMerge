@@ -1,4 +1,7 @@
 #include "ImageFeatures.h"
+#include "../../utils/Utils.h"
+#include <ctime>
+#include <cstdlib>
 
 void MapsMerge::ImageFeatures::readImage(string imgPath) {
 	img = imread(imgPath, CV_LOAD_IMAGE_GRAYSCALE);
@@ -32,6 +35,29 @@ void MapsMerge::ImageFeatures::showRegions(string windowName) {
 	namedWindow(windowName, WINDOW_NORMAL);
 	imshow(windowName, imgWithRegions);
 	waitKey(0);
+}
+
+void MapsMerge::ImageFeatures::showClusters(string windowName) {
+	Mat imgWithKeypoints = img.clone();
+	int numClusters = Utils::maxElement(keypointsClusters) + 1;
+	//debug
+	cout << "Num clustesrs " + windowName + ": " << numClusters << endl;
+	//end
+	vector<vector<KeyPoint>> clusterKeypointsMatrix(numClusters, vector<KeyPoint>());
+	for (int iKeyPoint = 0; iKeyPoint < keypoints.size(); iKeyPoint++) {
+		int cluster = keypointsClusters[iKeyPoint];
+		if (cluster != -1) {
+			clusterKeypointsMatrix[cluster].push_back(keypoints[iKeyPoint]);
+		}
+	}
+	srand(time(NULL));
+	for (int iCluster = 0; iCluster < numClusters; iCluster++) {
+		drawKeypoints(imgWithKeypoints, clusterKeypointsMatrix[iCluster], imgWithKeypoints, Scalar(rand() % 256, rand() % 256, rand() % 256));
+	}
+	namedWindow(windowName, WINDOW_NORMAL);
+	imshow(windowName, imgWithKeypoints);
+	waitKey(0);
+	imgWithKeypoints.release();
 }
 
 void MapsMerge::ImageFeatures::writeRegions(string fileName) {

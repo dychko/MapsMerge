@@ -34,9 +34,9 @@ void MapsMerge::Utils::printMatrix(string name, vector<vector<int>> matrix) {
 }
 
 vector<vector<int>> MapsMerge::Utils::transpose(vector<vector<int>> matrix) {
-	vector<vector<int>> transposedMatrix(matrix.size(), vector<int>(matrix[0].size()));
-	for (int i = 0; i < matrix.size(); i++) {
-		for (int j = 0; j < matrix[i].size(); j++) {
+	vector<vector<int>> transposedMatrix(matrix[0].size(), vector<int>(matrix.size()));
+	for (int i = 0; i < transposedMatrix.size(); i++) {
+		for (int j = 0; j < transposedMatrix[i].size(); j++) {
 			transposedMatrix[i][j] = matrix[j][i];
 		}
 	}
@@ -63,4 +63,8 @@ string MapsMerge::Utils::getTimeStr() {
 				  to_string(now->tm_min) + '_' + 
 				  to_string(now->tm_sec);
 	return time;
+}
+
+int MapsMerge::Utils::maxElement(vector<int>& vec) {
+	return *max_element(vec.begin(), vec.end());
 }
