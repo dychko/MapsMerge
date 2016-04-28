@@ -1,6 +1,7 @@
 #include "../../image_matches/ImagesMatches.h"
 #include "RegionsMatcher.h"
 #include "../regions_selector/RegionsSelector.h"
+#include "../regions_selector/ManualRegionsSelector.h"
 
 void MapsMerge::RegionsMatcher::shuffleRegions(ImagesMatches& imgsMatches) {
 	imgsMatches.imgFeatures1.shuffeRegions();
@@ -21,8 +22,8 @@ vector<vector<vector<int>>> MapsMerge::RegionsMatcher::createNumMatchesMatrices(
 		vector<Rect> oneRegion1(1, imgsMatches.imgFeatures1.regions[i]);
 		for (int j = 0; j  < numRegions2; j ++) {
 			vector<Rect> oneRegion2(1, imgsMatches.imgFeatures2.regions[j]);
-			numMatchesRegions12[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion1, oneRegion2).size();
-			numMatchesRegions21[i][j] = RegionsSelector::leaveRegionsMatches(imgsMatches, oneRegion2, oneRegion1).size();			
+			numMatchesRegions12[i][j] = (new ManualRegionsSelector())->leaveRegionsMatches(imgsMatches, oneRegion1, oneRegion2).size();
+			numMatchesRegions21[i][j] = (new ManualRegionsSelector())->leaveRegionsMatches(imgsMatches, oneRegion2, oneRegion1).size();			
 		}
 	}
 

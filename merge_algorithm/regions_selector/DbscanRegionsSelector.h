@@ -15,13 +15,12 @@ namespace MapsMerge {
 		vector<int> findClusters(vector<KeyPoint> keypoints, double eps, size_t numElements);
 
 	public:
-		void selectRegions(ImagesMatches& imgMatches);
-
 		DbscanRegionsSelector(double eps, size_t minElements, int numThreads = 4);
 		DbscanRegionsSelector(double eps1, size_t minElements1, double eps2, size_t minElements2, int numThreads = 4);
-
-		static vector<DMatch> leaveRegionsMatches(ImagesMatches&, vector<Rect>, vector<Rect>);
-
+		
+		void selectRegions(ImagesMatches& imgMatches);
+		
+		vector<DMatch> leaveRegionsMatches(ImagesMatches&, vector<Rect>, vector<Rect>);
 
 	};
 }

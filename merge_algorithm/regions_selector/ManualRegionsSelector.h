@@ -29,6 +29,7 @@ namespace MapsMerge {
 		ManualRegionsSelector() {};
 
 		void selectRegions(ImagesMatches& imgMatches);
+		vector<DMatch> leaveRegionsMatches(ImagesMatches& imgsMatches, vector<Rect> r1, vector<Rect> r2);
 	};
 }
 
