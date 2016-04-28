@@ -62,15 +62,15 @@ vector<DMatch> MapsMerge::DbscanRegionsSelector::leaveRegionsMatches(ImagesMatch
 	
 	for (int iKeyPoint1 = 0; iKeyPoint1 < imgsMatches.imgFeatures1.keypoints.size(); iKeyPoint1++) {
 		int iKeyPoint2 = imgsMatches.matches[iKeyPoint1].trainIdx;
-
-		if (imgsMatches.imgFeatures1.keypointsClusters[iKeyPoint1] != -1 &&
-			imgsMatches.imgFeatures2.keypointsClusters[iKeyPoint2] != -1) {
-			numMatchesMatrix[iKeyPoint1][iKeyPoint2]++;
+		int iCluster1 = imgsMatches.imgFeatures1.keypointsClusters[iKeyPoint1];
+		int iCluster2 = imgsMatches.imgFeatures2.keypointsClusters[iKeyPoint2];
+		if (iCluster1 != -1 && iCluster2 != -1) {
+			numMatchesMatrix[iCluster1][iCluster2]++;
 		}	
 	}
 
 	//debug
-	Utils::printMatrix("numMatchesMatrix", numMatchesMatrix);
+	//Utils::printMatrix("numMatchesMatrix", numMatchesMatrix);
 	//end
 
 	// 1.2 Find matched regions

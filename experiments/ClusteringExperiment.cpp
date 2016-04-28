@@ -29,13 +29,13 @@ void MapsMerge::ClusteringExperiment::run() {
 	mapsMerger.matchDescriptors();
 	//mapsMerger.showMatches("Matches");
 
-	//double eps1 = 0.010;
-	double eps1 = 0.05;
+	double eps1 = 0.010;
+	//double eps1 = 0.05;
 	size_t minElements1 = 5;
 
-	//double eps2 = 0.008;
-	double eps2 = 0.05;
-	size_t minElements2 = 15;
+	double eps2 = 0.005;
+	//double eps2 = 0.05;
+	size_t minElements2 = 5;
 
 	//cout << "Num keypoints1: " << mapsMerger.imagesMatches.imgFeatures1.keypoints.size() << endl;
 	//cout << "Num keypoints2: " << mapsMerger.imagesMatches.imgFeatures2.keypoints.size() << endl;
@@ -51,23 +51,23 @@ void MapsMerge::ClusteringExperiment::run() {
 
 	mapsMerger.selectRegions();
 
-	//mapsMerger.showClusters("Clusters1", "Clustes2");
+	mapsMerger.showClusters("Clusters1", "Clustes2");
 
 	mapsMerger.leaveRegionsMatches();
 	
-	//mapsMerger.showGoodMatches("Good Matches");
+	mapsMerger.showGoodMatches("Good Matches");
 
 
-	//mapsMerger.setImageTransformer(new ImageTransformerStrategy());
-	//mapsMerger.transformImage();
+	mapsMerger.setImageTransformer(new ImageTransformerStrategy());
+	mapsMerger.transformImage();
 
-	//mapsMerger.showTransformedImage("Transformed image");
+	mapsMerger.showTransformedImage("Transformed image");
 
-	//mapsMerger.setImagesMerger(new ImagesMergerStrategy());
-	//mapsMerger.mergeImages();
-	//mapsMerger.showMergedImage("Merge result");
+	mapsMerger.setImagesMerger(new ImagesMergerStrategy());
+	mapsMerger.mergeImages();
+	mapsMerger.showMergedImage("Merge result");
 
-	//mapsMerger.setQualityEvaluator(new MSSIM());
-	//mapsMerger.evaluateQuality();
+	mapsMerger.setQualityEvaluator(new MSSIM());
+	mapsMerger.evaluateQuality();
 
 }
