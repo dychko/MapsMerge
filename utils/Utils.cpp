@@ -33,6 +33,16 @@ void MapsMerge::Utils::printMatrix(string name, vector<vector<int>> matrix) {
 	}
 }
 
+void MapsMerge::Utils::printMatrix2(string name, vector<vector<int>> matrix) {
+	cout << name << endl;
+	for (int i = 0; i < matrix.size(); i++) {
+		for (int j = 0; j < matrix[i].size(); j++) {
+			cout << matrix[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
+
 vector<vector<int>> MapsMerge::Utils::transpose(vector<vector<int>> matrix) {
 	vector<vector<int>> transposedMatrix(matrix[0].size(), vector<int>(matrix.size()));
 	for (int i = 0; i < transposedMatrix.size(); i++) {

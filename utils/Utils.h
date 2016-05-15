@@ -15,6 +15,7 @@ namespace MapsMerge {
 	public:
 		static vector<vector<int>> getTuples4Vector(int maxSize);
 		static void printMatrix(string name, vector<vector<int>> matrix);
+		static void printMatrix2(string name, vector<vector<int>> matrix);
 		static vector<vector<int>> transpose(vector<vector<int>> matrix);
 		static vector<vector<int>> sumMatrices(vector<vector<int>> matrix1, vector<vector<int>> matrix2);
 		static string getTimeStr();

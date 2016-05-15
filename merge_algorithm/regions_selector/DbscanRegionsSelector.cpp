@@ -69,8 +69,25 @@ vector<DMatch> MapsMerge::DbscanRegionsSelector::leaveRegionsMatches(ImagesMatch
 		}	
 	}
 
+	// An attempt to improve quality of clusters matching
+	
+	vector<int> pointsPerCluster2(numClusters2);
+	for (int i = 0; i < imgsMatches.imgFeatures2.keypoints.size(); i++) {
+		if (imgsMatches.imgFeatures2.keypointsClusters[i] != -1) {
+			pointsPerCluster2[imgsMatches.imgFeatures2.keypointsClusters[i]]++;
+		}
+	}
+
+	for (int iCluster2 = 0; iCluster2 < numClusters2; iCluster2++) {
+		for (int iCluster1 = 0; iCluster1 < numClusters1; iCluster1++) {
+			numMatchesMatrix[iCluster1][iCluster2] = (double) numMatchesMatrix[iCluster1][iCluster2] / pointsPerCluster2[iCluster2] * 100;
+		}
+	}
+	
+	// end
+
 	//debug
-	//Utils::printMatrix("numMatchesMatrix", numMatchesMatrix);
+	//Utils::printMatrix2("numMatchesMatrix", numMatchesMatrix);
 	//end
 
 	// 1.2 Find matched regions

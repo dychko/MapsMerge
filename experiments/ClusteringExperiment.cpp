@@ -17,6 +17,9 @@ void MapsMerge::ClusteringExperiment::run() {
 	string imgPath1 = "imgs/ap-GOPR9460.jpg";
 	string imgPath2 = "imgs/from-google-cut.jpg";
 
+	//string imgPath1 = "imgs/GOPR9339.jpg";
+	//string imgPath2 = "imgs/GGL9339.jpg";
+
 	MapsMerger mapsMerger;
 	mapsMerger.readImages(imgPath1, imgPath2);
 	//mapsMerger.showImages("Image 1", "Image 2");
@@ -29,29 +32,22 @@ void MapsMerge::ClusteringExperiment::run() {
 	mapsMerger.matchDescriptors();
 	//mapsMerger.showMatches("Matches");
 
+	//double eps1 = 0.005;
+	//size_t minElements1 = 30;
 	double eps1 = 0.010;
-	//double eps1 = 0.05;
 	size_t minElements1 = 5;
 
 	double eps2 = 0.005;
-	//double eps2 = 0.05;
 	size_t minElements2 = 5;
-
-	//cout << "Num keypoints1: " << mapsMerger.imagesMatches.imgFeatures1.keypoints.size() << endl;
-	//cout << "Num keypoints2: " << mapsMerger.imagesMatches.imgFeatures2.keypoints.size() << endl;
-
-	//         5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15
-	//       ---+---+---+---+---+---+---+--+---+---+---+
-	//0.010 [ 50, 43, 50, 43, 42, 38, 31, 37, 27, 26, 26 ]
-	//0.015 [ 10,  8, 10, 12, 15, 18, 18, 20, 22, 24, 21 ]
-	//0.020 [  9,  8,  6,  4,  5,  6,  7,  7,  7,  6,  6 ]
-	//0.025 [  3,  3,  4,  5,  2,  2,  2,  2,  2,  2,  3 ]
+	//double eps2 = 0.005;
+	//size_t minElements2 = 5;
 
 	mapsMerger.setRegionsSelector(new DbscanRegionsSelector(eps1, minElements1, eps2, minElements2));
+	//mapsMerger.setRegionsSelector(new DbscanRegionsSelector(eps1, minElements1));
 
 	mapsMerger.selectRegions();
 
-	mapsMerger.showClusters("Clusters1", "Clustes2");
+	mapsMerger.showClusters("Clusters1", "Clusters2");
 
 	mapsMerger.leaveRegionsMatches();
 	
